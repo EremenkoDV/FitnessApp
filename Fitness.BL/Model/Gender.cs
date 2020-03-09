@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Model
 {
+    [Serializable]
     /// <summary>
-    /// Gender
+    /// Class Gender
     /// </summary>
     public class Gender
     {

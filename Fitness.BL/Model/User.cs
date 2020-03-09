@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Fitness.BL.Model
 {
+    [Serializable]
+    /// <summary>
+    /// Class User
+    /// </summary>
     public class User
     {
 
