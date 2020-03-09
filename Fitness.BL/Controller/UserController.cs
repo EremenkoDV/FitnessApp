@@ -16,9 +16,11 @@ namespace Fitness.BL.Controller
     {
 
         /// <summary>
-        /// User
+        /// List of Users
         /// </summary>
-        public User User { get; }
+        public List<User> Users { get; }
+
+        public User CurrentUser { get; }
 
         /// <summary>
         /// Constructor
@@ -27,15 +29,35 @@ namespace Fitness.BL.Controller
         public UserController(string userName, string genderName, string birthday, string weight, string height)
         {
             /// TODO : Проверка входных данных
+            
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(userName));
+            }
+
+            Users = GetUsersData();
+
+            CurrentUser = Users.SingleOrDefault(e => e.Name == userName);
+
+            if (CurrentUser == null)
+            {
+                CurrentUser = new User(userName);
+                Users.Add(CurrentUser);
+                Save();
+            }
+
             Gender gender = new Gender(genderName);
-            User = new User(userName, gender, Convert.ToDateTime(birthday), Convert.ToDouble(weight), Convert.ToDouble(height));
+            Users.Add(new User(userName, gender, Convert.ToDateTime(birthday), Convert.ToDouble(weight), Convert.ToDouble(height)));
             //User = user ?? throw new ArgumentNullException("Пользователь не может быть null", nameof(user));
         }
 
-        public UserController()
+        /// <summary>
+        /// Get users data
+        /// </summary>
+        /// <returns></returns>
+        private List<User> GetUsersData()
         {
-            User = Load();
-            /// TODO : Что делать если пользователя не прочитали?
+            return Load();
         }
 
         /// <summary>
@@ -45,9 +67,9 @@ namespace Fitness.BL.Controller
         {
             var formatter = new BinaryFormatter();
 
-            using (FileStream fs = new FileStream("user.dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
             {
-                formatter.Serialize(fs, User);
+                formatter.Serialize(fs, Users);
             }
         }
 
@@ -55,16 +77,21 @@ namespace Fitness.BL.Controller
         /// Load user's data from file
         /// </summary>
         /// <returns></returns>
-        public User Load()
+        public List<User> Load()
         {
-            User user = null;
             var formatter = new BinaryFormatter();
 
-            using (FileStream fs = new FileStream("user.dat", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
             {
-                user = formatter.Deserialize(fs) as User;
+                if (formatter.Deserialize(fs) is List<User> users)
+                {
+                    return users;
+                }
+                else
+                {
+                    return new List<User>();
+                }
             }
-            return user;
         }
     }
 }

@@ -29,6 +29,8 @@ namespace Fitness.BL.Model
         /// </summary>
         public DateTime Birthday { get; }
 
+        public int Age => GetAge(Birthday);
+
         /// <summary>
         /// User weight
         /// </summary>
@@ -89,9 +91,27 @@ namespace Fitness.BL.Model
             Height = height;
         }
 
+        private int GetAge(DateTime dateTime)
+        {
+            int age = DateTime.Now.Year - dateTime.Year;
+            return dateTime > DateTime.Now.AddYears(-age) ? age-- : age;
+        }
+
+        public User(string name)
+        {
+            #region Arguments validation
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("Имя не может быть пустым или null.", nameof(name));
+            }
+            #endregion Arguments validation
+
+            Name = name;
+        }
+
         public override string ToString()
         {
-            return Name;
+            return Name + " " + Age;
         }
     }
 }
