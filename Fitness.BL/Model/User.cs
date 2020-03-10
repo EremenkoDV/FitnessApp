@@ -22,12 +22,12 @@ namespace Fitness.BL.Model
         /// <summary>
         /// User gender
         /// </summary>
-        public Gender Gender { get; }
+        public Gender Gender { get; set; }
 
         /// <summary>
         /// User birthdate
         /// </summary>
-        public DateTime Birthday { get; }
+        public DateTime Birthday { get; set; }
 
         public int Age => GetAge(Birthday);
 
