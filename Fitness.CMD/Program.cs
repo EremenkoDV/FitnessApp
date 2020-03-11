@@ -2,17 +2,22 @@
 using Fitness.BL.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Fitness.CMD
 {
-    class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Вас приветствует приложение Fitness.");
+            int age = GetInputedValue<int>("возраст пользователя: ");
+            DateTime birthday = GetInputedValue<DateTime>("день рождения пользователя: ");
+            double weight = GetInputedValue<double>("вес пользователя: ");
+            double height = GetInputedValue<double>("рост пользователя: ");
 
             Console.Write("Введите имя пользователя:");
             string name = Console.ReadLine();
@@ -23,17 +28,11 @@ namespace Fitness.CMD
                 Console.Write("Введите пол пользователя:");
                 string gender = Console.ReadLine();
 
-                Console.Write("Введите дату рождения пользователя:");
-                string birthday = Console.ReadLine();
+                //DateTime birthday = GetInputedValue<DateTime>("день рождения пользователя: ");
+                //double weight = GetInputedValue<double>("вес пользователя: ");
+                //double height = GetInputedValue<double>("рост пользователя: ");
 
-                //Console.Write("Введите вес пользователя:");
-                //double weight;
-                double weight = GetCorrectedValue<double>("вес пользователя: ");
-
-                Console.Write("Введите рост пользователя:");
-                string height = Console.ReadLine();
-
-                userController.SetNewUserData(name, gender, birthday, weight, height);
+                //userController.SetNewUserData(name, gender, birthday, weight.ToString(), height);
             }
 
             Console.Write(userController.CurrentUser);
@@ -41,61 +40,43 @@ namespace Fitness.CMD
 
         }
 
-        private static T GetCorrectedValue<T>(string parameter)
+
+        public static bool TryParse<T>(string input, out T result)
         {
-            int attemps = 0;
-            bool isChecked = false;
-            T result;
             result = default(T);
+            try
+            {
+                TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(input);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public static T GetInputedValue<T>(string parameter, string conditions)
+        {
+            int attemps = 3;
+            T result;
             do
             {
                 Console.Write("Введите " + parameter);
-                switch (result.GetType().ToString())
-)               {
-                    case typeof(int).ToString():
-                        int intResult;
-                        if (int.TryParse(Console.ReadLine(), out intResult))
-                        {
-                            isChecked = true;
-                        }
-                        break;
-                    case typeof(double).ToString():
-                        double dblResult;
-                        if (double.TryParse(Console.ReadLine(), out dblResult))
-                        {
-                            isChecked = true;
-                        }
-                        break;
-                    case typeof(DateTime).ToString():
-                        DateTime dtResult;
-                        if (DateTime.TryParse(Console.ReadLine(), out dtResult))
-                        {
-                            isChecked = true;
-                        }
-                        break;
-                    default:
-                        string strResult;
-                        strResult = Console.ReadLine();
-                        isChecked = true;
-                        break;
-                }
 
-                if (isChecked)
+                if (TryParse<T>(Console.ReadLine(), out result))
                 {
-                    Console.WriteLine("Введены некоректные данные. Попробуйте еще раз.");
+                    return result;
+                }
+                else if (attemps-- > 0)
+                {
+                    Console.WriteLine($"Введены некоректные данные. {(attemps == 1 ? "Осталась " + attemps + " попытка" : "Осталось " + attemps + (attemps > 1 && attemps < 5 ? " попытки" : " попыток"))}.");
                 }
 
-            } while (attemps++ < 3);
+            } while (attemps > 0);
 
+            Console.WriteLine("Количество попыток исчерпано!");
             throw new ArgumentException("Введены некоректные данные. Количество попыток исчерпано!", nameof(parameter));
 
-            class T
-            {
-                protected string Type()
-                {
-                    return GetType()
-                }
-            }
         }
 
     }

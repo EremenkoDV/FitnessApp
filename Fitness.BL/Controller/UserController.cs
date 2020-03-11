@@ -41,6 +41,8 @@ namespace Fitness.BL.Controller
 
             CurrentUser = Users.FirstOrDefault(e => e.Name == userName);
 
+            IsNewUser = CurrentUser is null;
+
         }
 
 
@@ -54,12 +56,12 @@ namespace Fitness.BL.Controller
 
             if (string.IsNullOrWhiteSpace(_name))
             {
-                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(userName));
+                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(_name));
             }
 
             if (string.IsNullOrWhiteSpace(_gender))
             {
-                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(userName));
+                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(_gender));
             }
             CurrentUser.Gender = new Gender(_gender);
 
@@ -80,7 +82,7 @@ namespace Fitness.BL.Controller
             Save();
 
 
-            Users.Add(new User(userName, gender, Convert.ToDateTime(birthday), Convert.ToDouble(weight), Convert.ToDouble(height)));
+            Users.Add(new User(_name,new Gender(_gender), Convert.ToDateTime(_birthday), Convert.ToDouble(weight), Convert.ToDouble(height)));
             //User = user ?? throw new ArgumentNullException("Пользователь не может быть null", nameof(user));
         }
 
