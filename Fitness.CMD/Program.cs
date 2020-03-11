@@ -27,7 +27,8 @@ namespace Fitness.CMD
                 string birthday = Console.ReadLine();
 
                 //Console.Write("Введите вес пользователя:");
-                double weight = GetCorrectedValue("вес пользователя: ");
+                //double weight;
+                double weight = GetCorrectedValue<double>("вес пользователя: ");
 
                 Console.Write("Введите рост пользователя:");
                 string height = Console.ReadLine();
@@ -43,20 +44,58 @@ namespace Fitness.CMD
         private static T GetCorrectedValue<T>(string parameter)
         {
             int attemps = 0;
+            bool isChecked = false;
             T result;
+            result = default(T);
             do
             {
                 Console.Write("Введите " + parameter);
-                if (T.TryParse(Console.ReadLine(), result))
-                {
-                    return result;
+                switch (result.GetType().ToString())
+)               {
+                    case typeof(int).ToString():
+                        int intResult;
+                        if (int.TryParse(Console.ReadLine(), out intResult))
+                        {
+                            isChecked = true;
+                        }
+                        break;
+                    case typeof(double).ToString():
+                        double dblResult;
+                        if (double.TryParse(Console.ReadLine(), out dblResult))
+                        {
+                            isChecked = true;
+                        }
+                        break;
+                    case typeof(DateTime).ToString():
+                        DateTime dtResult;
+                        if (DateTime.TryParse(Console.ReadLine(), out dtResult))
+                        {
+                            isChecked = true;
+                        }
+                        break;
+                    default:
+                        string strResult;
+                        strResult = Console.ReadLine();
+                        isChecked = true;
+                        break;
                 }
-                else
+
+                if (isChecked)
                 {
                     Console.WriteLine("Введены некоректные данные. Попробуйте еще раз.");
                 }
+
             } while (attemps++ < 3);
+
             throw new ArgumentException("Введены некоректные данные. Количество попыток исчерпано!", nameof(parameter));
+
+            class T
+            {
+                protected string Type()
+                {
+                    return GetType()
+                }
+            }
         }
 
     }
