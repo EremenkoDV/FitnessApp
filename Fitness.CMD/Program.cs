@@ -15,24 +15,18 @@ namespace Fitness.CMD
         static void Main(string[] args)
         {
             Console.WriteLine("Вас приветствует приложение Fitness.");
-            int age = GetInputedValue<int>("возраст пользователя: ", "value > 0");
-            DateTime birthday = GetInputedValue<DateTime>("день рождения пользователя: ");
-            double weight = GetInputedValue<double>("вес пользователя: ");
-            double height = GetInputedValue<double>("рост пользователя: ");
 
-            Console.Write("Введите имя пользователя:");
-            string name = Console.ReadLine();
+            string name = GetInputedValue<string>("имя пользователя: ", "value <> ''");
 
             UserController userController = new UserController(name);
             if (userController.IsNewUser)
             {
-                Console.Write("Введите пол пользователя:");
-                string gender = Console.ReadLine();
-                //DateTime birthday = GetInputedValue<DateTime>("день рождения пользователя: ");
-                //double weight = GetInputedValue<double>("вес пользователя: ");
-                //double height = GetInputedValue<double>("рост пользователя: ");
+                string gender = GetInputedValue<string>("пол пользователя: ", "value <> ''");
+                DateTime birthday = GetInputedValue<DateTime>("день рождения пользователя: ", "value > '01.01.1900' AND value < '" + DateTime.Now + "'");
+                double weight = GetInputedValue<double>("вес пользователя: ", "value > '10' AND value < '300'");
+                double height = GetInputedValue<double>("рост пользователя: ", "value > '50' AND value < '300'");
 
-                //userController.SetNewUserData(name, gender, birthday, weight.ToString(), height);
+                userController.SetNewUserData(name, gender, birthday, weight, height);
             }
 
             Console.Write(userController.CurrentUser);
@@ -40,13 +34,19 @@ namespace Fitness.CMD
 
         }
 
-
-        public static bool TryParse<T>(string input, out T result)
+        /// <summary>
+        /// TryParse method for any struct types
+        /// </summary>
+        /// <typeparam name="T">any struct type, e.g. (int, float, double, string, bool, DateTime)</typeparam>
+        /// <param name="value">input value</param>
+        /// <param name="result">output value</param>
+        /// <returns></returns>
+        public static bool TryParse<T>(string value, out T result)
         {
             result = default(T);
             try
             {
-                TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(input);
+                result = (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(value);
                 return true;
             }
             catch
@@ -55,21 +55,27 @@ namespace Fitness.CMD
             }
         }
 
+        /// <summary>
+        /// Get inputed value from keyboard
+        /// </summary>
+        /// <typeparam name="T">any struct type, e.g. (int, float, double, string, bool, DateTime)</typeparam>
+        /// <param name="parameter">parameter's name</param>
+        /// <param name="conditions">SQL string conditions, e.g. "value > '01.01.2000' AND value < '31.12.2020'"</param>
+        /// <returns></returns>
         public static T GetInputedValue<T>(string parameter, string conditions = "")
         {
             int attemps = 3;
-            T result;
             do
             {
                 Console.Write("Введите " + parameter);
 
-                if (TryParse<T>(Console.ReadLine(), out result))
+                if (TryParse<T>(Console.ReadLine(), out T result))
                 {
-                    if (TestCondition(result, conditions))
+                    if (IsTrue(result, conditions))
                     {
                         return result;
                     }
-                    else
+                    else if (attemps-- > 0)
                     {
                         Console.WriteLine($"Введены данные не соответствующие условию : {conditions}. {(attemps == 1 ? "Осталась " + attemps + " попытка" : "Осталось " + attemps + (attemps > 1 && attemps < 5 ? " попытки" : " попыток"))}.");
                     }
@@ -86,17 +92,22 @@ namespace Fitness.CMD
 
         }
 
-        public static bool TestCondition<T>(T value, string c)
+        /// <summary>
+        /// Test value on conditions
+        /// </summary>
+        /// <typeparam name="T">any struct type, e.g. (int, float, double, string, bool, DateTime)</typeparam>
+        /// <param name="value">value</param>
+        /// <param name="conditions">SQL string conditions, e.g. "(value > '0' AND value < '10' AND value <> '5') OR (value > '50' AND value < '60')"</param>
+        /// <returns></returns>
+        public static bool IsTrue<T>(T value, string conditions)
         {
             var dt = new DataTable();
             dt.Columns.Add("value", typeof(T));
             DataRow row = dt.NewRow();
-            //dt.Rows.Add("value");
             row["value"] = value;
-            // hack
-            // c is constant and doesn't depend on dt columns
-            // if there are any rows, c is TRUE
-            var rows = dt.Select(c);
+            dt.Rows.Add(row);
+            //dt.AcceptChanges();
+            var rows = dt.Select(conditions);
             return rows.Length > 0;
         }
 

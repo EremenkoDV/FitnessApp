@@ -22,7 +22,7 @@ namespace Fitness.BL.Controller
 
         public User CurrentUser { get; }
 
-        public bool IsNewUser { get; }
+        public bool IsNewUser { get; } = false;
 
         /// <summary>
         /// Constructor
@@ -43,6 +43,14 @@ namespace Fitness.BL.Controller
 
             IsNewUser = CurrentUser is null;
 
+            if (CurrentUser == null)
+            {
+                CurrentUser = new User(userName);
+                Users.Add(CurrentUser);
+                Save();
+            }
+
+
         }
 
 
@@ -50,39 +58,39 @@ namespace Fitness.BL.Controller
         /// Set a Data with validation for a new user
         /// </summary>
         /// <param name="user">User's name</param>
-        public void SetNewUserData(string _name, string _gender, string _birthday, string _weight = "1", string _height = "1")
+        public void SetNewUserData(string name, string gender, DateTime birthday, double weight = 1, double height = 1)
         {
             /// TODO : Проверка входных данных
 
-            if (string.IsNullOrWhiteSpace(_name))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(_name));
+                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(name));
             }
 
-            if (string.IsNullOrWhiteSpace(_gender))
+            if (string.IsNullOrWhiteSpace(gender))
             {
-                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(_gender));
-            }
-            CurrentUser.Gender = new Gender(_gender);
-
-            if (DateTime.TryParse(_birthday, out DateTime dateTime))
-            {
-                CurrentUser.Birthday = dateTime;
+                throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(gender));
             }
 
-            if (Int32.TryParse(_weight, out int weight))
-            {
-                CurrentUser.Weight = weight;
-            }
+            CurrentUser.Gender = new Gender(gender);
 
-            if (Int32.TryParse(_height, out int height))
-            {
-                CurrentUser.Height = height;
-            }
+            //if (DateTime.TryParse(_birthday, out DateTime dateTime))
+            //{
+            CurrentUser.Birthday = birthday;
+            //}
+
+            //if (Int32.TryParse(_weight, out int weight))
+            //{
+            CurrentUser.Weight = weight;
+            //}
+
+            //if (Int32.TryParse(_height, out int height))
+            //{
+            CurrentUser.Height = height;
+            //}
             Save();
 
 
-            Users.Add(new User(_name,new Gender(_gender), Convert.ToDateTime(_birthday), Convert.ToDouble(weight), Convert.ToDouble(height)));
             //User = user ?? throw new ArgumentNullException("Пользователь не может быть null", nameof(user));
         }
 
