@@ -50,9 +50,7 @@ namespace Fitness.BL.Controller
                 Save();
             }
 
-
         }
-
 
         /// <summary>
         /// Set a Data with validation for a new user
