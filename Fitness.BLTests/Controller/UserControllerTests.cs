@@ -11,7 +11,7 @@ namespace Fitness.BL.Controller.Tests
     [TestClass()]
     public class UserControllerTests
     {
-        [TestMethod()]
+        //[TestMethod()]
         public void UserControllerTest()
         {
             Assert.Fail();
@@ -30,9 +30,14 @@ namespace Fitness.BL.Controller.Tests
 
             // Act
             controller.SetNewUserData(userName, gender, birthday, weight, height);
+            var controller2 = new UserController(userName);
 
             // Assert
-            Assert.AreEqual(userName, controller.CurrentUser.Name);
+            Assert.AreEqual(userName, controller2.CurrentUser.Name);
+            Assert.AreEqual(gender, controller2.CurrentUser.Gender.Name);
+            Assert.AreEqual(birthday, controller2.CurrentUser.Birthday);
+            Assert.AreEqual(weight, controller2.CurrentUser.Weight);
+            Assert.AreEqual(height, controller2.CurrentUser.Height);
         }
 
         [TestMethod()]
@@ -48,7 +53,7 @@ namespace Fitness.BL.Controller.Tests
             Assert.AreEqual(userName, controller.CurrentUser.Name);
         }
 
-        [TestMethod()]
+        //[TestMethod()]
         public void LoadTest()
         {
             Assert.Fail();

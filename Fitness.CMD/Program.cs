@@ -15,6 +15,7 @@ namespace Fitness.CMD
         static void Main(string[] args)
         {
             Console.WriteLine("Вас приветствует приложение Fitness.");
+            Console.WriteLine("--------------------------------------------------------");
 
             string name = GetInputedValue<string>("имя пользователя: ", "value <> ''");
 
@@ -30,7 +31,43 @@ namespace Fitness.CMD
             }
 
             Console.Write(userController.CurrentUser);
-            Console.ReadLine();
+            //Console.ReadLine();
+
+            Console.WriteLine("--------------------------------------------------------");
+            Console.WriteLine("Что Вы хотите сделать?");
+            Console.Write("E - ввести прием пищи :");
+            var key = Console.ReadKey();
+            if (key.Key == ConsoleKey.E)
+            {
+                Console.WriteLine("");
+                string foodName = GetInputedValue<string>("имя продукта: ", "value <> ''");
+                double weight = GetInputedValue<double>("вес порции продукта (в граммах): ", "value > '0' AND value < '10000'");
+                double calories = GetInputedValue<double>("количество калорийность в порции продукта (в калориях): ", "value > '0' AND value < '10000'");
+                double proteins = GetInputedValue<double>("количество белков в порции продукта (в граммах): ", "value >= '0' AND value < '10000'");
+                double fats = GetInputedValue<double>("количество жиров в порции продукта (в граммах): ", "value >= '0' AND value < '10000'");
+                double carbohydrates = GetInputedValue<double>("количество углеводов в порции продукта (в граммах): ", "value >= '0' AND value < '10000'");
+
+                Food food = new Food(foodName, calories, proteins, fats, carbohydrates);
+                EatingController eatingController = new EatingController(userController.CurrentUser);
+                eatingController.Add(food, weight);
+
+                //Console.Write(eatingController.Eating.Foods.FirstOrDefault(e => e.Key == foodName.GetHashCode()));
+                foreach (var item in eatingController.Foods)
+                {
+                    Console.WriteLine("--------------------------------------------------------");
+                    Console.WriteLine(item.Id);
+                    Console.WriteLine(item.Name);
+                    Console.WriteLine(item.Calories);
+                    Console.WriteLine(item.Proteins);
+                    Console.WriteLine(item.Fats);
+                    Console.WriteLine(item.Carbohydrates);
+                }
+
+
+                Console.ReadLine();
+            }
+
+
 
         }
 
