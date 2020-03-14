@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,20 +14,26 @@ namespace Fitness.CMD
 {
     internal class Program
     {
+        //static CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
+        static CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        //static CultureInfo culture = CultureInfo.CreateSpecificCulture("de-DE");
+        static ResourceManager resourceManager = new ResourceManager("Fitness.CMD.Languages.Messages", typeof(Program).Assembly);
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Вас приветствует приложение Fitness.");
-            Console.WriteLine("--------------------------------------------------------");
 
-            string name = GetInputedValue<string>("имя пользователя: ", "value <> ''");
+            Console.WriteLine(resourceManager.GetString("Welcome", culture));
+            Console.WriteLine(resourceManager.GetString("Line", culture));
+
+            string name = GetEnteredValue<string>(resourceManager.GetString("UserName", culture) + ": ", "value <> ''");
 
             UserController userController = new UserController(name);
             if (userController.IsNewUser)
             {
-                string gender = GetInputedValue<string>("пол пользователя: ", "value <> ''");
-                DateTime birthday = GetInputedValue<DateTime>("день рождения пользователя: ", "value > '01.01.1900' AND value < '" + DateTime.Now + "'");
-                double weight = GetInputedValue<double>("вес пользователя: ", "value > '10' AND value < '300'");
-                double height = GetInputedValue<double>("рост пользователя: ", "value > '50' AND value < '300'");
+                string gender = GetEnteredValue<string>(resourceManager.GetString("UserGender", culture) + ": ", "value <> ''");
+                DateTime birthday = GetEnteredValue<DateTime>(resourceManager.GetString("UserBirthday", culture) + ": ", "value > '01.01.1900' AND value < '" + DateTime.Now + "'");
+                double weight = GetEnteredValue<double>(resourceManager.GetString("UserWeight", culture) + ": ", "value > '10' AND value < '300'");
+                double height = GetEnteredValue<double>(resourceManager.GetString("UserHeight", culture) + ": ", "value > '50' AND value < '300'");
 
                 userController.SetNewUserData(name, gender, birthday, weight, height);
             }
@@ -33,19 +41,19 @@ namespace Fitness.CMD
             Console.Write(userController.CurrentUser);
             //Console.ReadLine();
 
-            Console.WriteLine("--------------------------------------------------------");
-            Console.WriteLine("Что Вы хотите сделать?");
-            Console.Write("E - ввести прием пищи :");
+            Console.WriteLine(resourceManager.GetString("Line", culture));
+            Console.WriteLine(resourceManager.GetString("ActQuestion", culture));
+            Console.Write(resourceManager.GetString("Description", culture) +" :");
             var key = Console.ReadKey();
             if (key.Key == ConsoleKey.E)
             {
-                Console.WriteLine("");
-                string foodName = GetInputedValue<string>("имя продукта: ", "value <> ''");
-                double weight = GetInputedValue<double>("вес порции продукта (в граммах): ", "value > '0' AND value < '10000'");
-                double calories = GetInputedValue<double>("количество калорийность в порции продукта (в калориях): ", "value > '0' AND value < '10000'");
-                double proteins = GetInputedValue<double>("количество белков в порции продукта (в граммах): ", "value >= '0' AND value < '10000'");
-                double fats = GetInputedValue<double>("количество жиров в порции продукта (в граммах): ", "value >= '0' AND value < '10000'");
-                double carbohydrates = GetInputedValue<double>("количество углеводов в порции продукта (в граммах): ", "value >= '0' AND value < '10000'");
+                Console.WriteLine("", culture);
+                string foodName = GetEnteredValue<string>(resourceManager.GetString("FoodName", culture) + ": ", "value <> ''");
+                double weight = GetEnteredValue<double>(resourceManager.GetString("FoodWeight", culture) + ": ", "value > '0' AND value < '10000'");
+                double calories = GetEnteredValue<double>(resourceManager.GetString("FoodCalories", culture) + ": ", "value > '0' AND value < '10000'");
+                double proteins = GetEnteredValue<double>(resourceManager.GetString("FoodProteins", culture) + ": ", "value >= '0' AND value < '10000'");
+                double fats = GetEnteredValue<double>(resourceManager.GetString("FoodFats", culture) + ": ", "value >= '0' AND value < '10000'");
+                double carbohydrates = GetEnteredValue<double>(resourceManager.GetString("FoodCarbohydrates", culture) + ": ", "value >= '0' AND value < '10000'");
 
                 Food food = new Food(foodName, calories, proteins, fats, carbohydrates);
                 EatingController eatingController = new EatingController(userController.CurrentUser);
@@ -54,7 +62,7 @@ namespace Fitness.CMD
                 //Console.Write(eatingController.Eating.Foods.FirstOrDefault(e => e.Key == foodName.GetHashCode()));
                 foreach (var item in eatingController.Foods)
                 {
-                    Console.WriteLine("--------------------------------------------------------");
+                    Console.WriteLine(resourceManager.GetString("Line", culture));
                     Console.WriteLine(item.Id);
                     Console.WriteLine(item.Name);
                     Console.WriteLine(item.Calories);
@@ -93,18 +101,18 @@ namespace Fitness.CMD
         }
 
         /// <summary>
-        /// Get inputed value from keyboard
+        /// Get entered value from keyboard
         /// </summary>
         /// <typeparam name="T">any struct type, e.g. (int, float, double, string, bool, DateTime)</typeparam>
         /// <param name="parameter">parameter's name</param>
         /// <param name="conditions">SQL string conditions, e.g. "value > '01.01.2000' AND value < '31.12.2020'"</param>
         /// <returns></returns>
-        public static T GetInputedValue<T>(string parameter, string conditions = "")
+        public static T GetEnteredValue<T>(string parameter, string conditions = "")
         {
             int attemps = 3;
             do
             {
-                Console.Write("Введите " + parameter);
+                Console.Write(resourceManager.GetString("Enter", culture) + " " + parameter);
 
                 if (TryParse<T>(Console.ReadLine(), out T result))
                 {
@@ -124,8 +132,8 @@ namespace Fitness.CMD
 
             } while (attemps > 0);
 
-            Console.WriteLine("Количество попыток исчерпано!");
-            throw new ArgumentException("Введены некоректные данные. Количество попыток исчерпано!", nameof(parameter));
+            Console.WriteLine(resourceManager.GetString("ErrorMessage1", culture));
+            throw new ArgumentException(resourceManager.GetString("ErrorMessage2", culture), nameof(parameter));
 
         }
 
