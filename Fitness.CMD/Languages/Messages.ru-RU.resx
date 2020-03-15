@@ -120,9 +120,6 @@
   <data name="ActQuestion" xml:space="preserve">
     <value>Что Вы хотите сделать?</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>E - ввести прием пищи</value>
-  </data>
   <data name="Enter" xml:space="preserve">
     <value>Введите</value>
   </data>
@@ -131,6 +128,18 @@
   </data>
   <data name="ErrorMessage2" xml:space="preserve">
     <value>Введены некоректные данные. Количество попыток исчерпано!</value>
+  </data>
+  <data name="ExerciseBegin" xml:space="preserve">
+    <value>дату и время начала упражнения</value>
+  </data>
+  <data name="ExerciseEnd" xml:space="preserve">
+    <value>дату и время окончания упражнения</value>
+  </data>
+  <data name="ExerciseEnergy" xml:space="preserve">
+    <value>расход энергии в минуту (в калориях)</value>
+  </data>
+  <data name="ExerciseName" xml:space="preserve">
+    <value>название упражнения</value>
   </data>
   <data name="FoodCalories" xml:space="preserve">
     <value>количество калорийность в порции продукта (в калориях)</value>
@@ -152,6 +161,15 @@
   </data>
   <data name="Line" xml:space="preserve">
     <value>--------------------------------------------------------</value>
+  </data>
+  <data name="Select1" xml:space="preserve">
+    <value>E - ввести прием пищи</value>
+  </data>
+  <data name="Select2" xml:space="preserve">
+    <value>A - ввести вид активности</value>
+  </data>
+  <data name="Select3" xml:space="preserve">
+    <value>Q - выход</value>
   </data>
   <data name="UserBirthday" xml:space="preserve">
     <value>день рождения пользователя</value>

@@ -41,13 +41,12 @@ namespace Fitness.BL.Controller
                 Foods.Add(food);
                 Eating.Add(food, weight);
                 Save<List<Food>>(FOODS_FILE_NAME, Foods);
-                Save<Eating>(EATINGS_FILE_NAME, Eating);
             }
             else
             {
                 Eating.Add(product, weight);
-                Save<Eating>(EATINGS_FILE_NAME, Eating);
             }
+            Save<Eating>(EATINGS_FILE_NAME, Eating);
         }
 
         //public bool Add(string foodName, double weight)

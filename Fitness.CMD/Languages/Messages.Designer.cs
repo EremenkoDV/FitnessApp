@@ -70,15 +70,6 @@ namespace Fitness.CMD.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на E - enter eating data.
-        /// </summary>
-        internal static string Description {
-            get {
-                return ResourceManager.GetString("Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Enter.
         /// </summary>
         internal static string Enter {
@@ -102,6 +93,42 @@ namespace Fitness.CMD.Languages {
         internal static string ErrorMessage2 {
             get {
                 return ResourceManager.GetString("ErrorMessage2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на date and time to start.
+        /// </summary>
+        internal static string ExerciseBegin {
+            get {
+                return ResourceManager.GetString("ExerciseBegin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на date and time to finish.
+        /// </summary>
+        internal static string ExerciseEnd {
+            get {
+                return ResourceManager.GetString("ExerciseEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на consumption energy per minute (in calories).
+        /// </summary>
+        internal static string ExerciseEnergy {
+            get {
+                return ResourceManager.GetString("ExerciseEnergy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на exercise&apos;s name.
+        /// </summary>
+        internal static string ExerciseName {
+            get {
+                return ResourceManager.GetString("ExerciseName", resourceCulture);
             }
         }
         
@@ -165,6 +192,33 @@ namespace Fitness.CMD.Languages {
         internal static string Line {
             get {
                 return ResourceManager.GetString("Line", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на E - enter eating data.
+        /// </summary>
+        internal static string Select1 {
+            get {
+                return ResourceManager.GetString("Select1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на A - enter activity.
+        /// </summary>
+        internal static string Select2 {
+            get {
+                return ResourceManager.GetString("Select2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Q - exit.
+        /// </summary>
+        internal static string Select3 {
+            get {
+                return ResourceManager.GetString("Select3", resourceCulture);
             }
         }
         
