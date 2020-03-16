@@ -12,6 +12,7 @@ namespace Fitness.BL.Model
     /// </summary>
     public class Exercise
     {
+        public int Id { get; set; }
 
         public Activity Activity { get; set; }
 

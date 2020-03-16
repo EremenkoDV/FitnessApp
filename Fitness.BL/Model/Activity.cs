@@ -13,6 +13,7 @@ namespace Fitness.BL.Model
     /// </summary>
     public class Activity
     {
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public double CaloriesperMinute { get; }

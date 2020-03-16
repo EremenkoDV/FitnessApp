@@ -12,6 +12,7 @@ namespace Fitness.BL.Model
     /// </summary>
     public class Eating
     {
+        public int Id { get; set; }
 
         /// <summary>
         /// Moment of eating

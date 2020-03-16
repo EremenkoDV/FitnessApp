@@ -11,37 +11,23 @@ namespace Fitness.BL.Controller
     public abstract class ControllerBase
     {
 
+        protected IDataHandler dataHandler = new SerializeDataHandler();
+
         /// <summary>
         /// Load users data
         /// </summary>
         /// <returns></returns>
-        protected virtual T Load<T>(string fileName)
+        protected T Load<T>(string fileName)
         {
-            var formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
-            {
-                if (fs.Length > 0 && (formatter.Deserialize(fs) is T items))
-                {
-                    return items;
-                }
-                else
-                {
-                    return default(T);
-                }
-            }
+            return dataHandler.Load<T>(fileName);
         }
 
         /// <summary>
         /// Save user's data
         /// </summary>
-        protected virtual void Save<T>(string fileName, T items)
+        protected void Save<T>(string fileName, T items)
         {
-            var formatter = new BinaryFormatter();
-
-            using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, items);
-            }
+            dataHandler.Save<T>(fileName, items);
         }
 
     }

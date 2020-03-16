@@ -14,6 +14,8 @@ namespace Fitness.BL.Model
     {
 
         #region Properties
+        public int Id { get; set; }
+
         /// <summary>
         /// User name
         /// </summary>

@@ -16,7 +16,7 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Food's name
         /// </summary>
-        public int Id { get; }
+        public int Id { get; set; }
         /// <summary>
         /// Food's ID
         /// </summary>
