@@ -19,7 +19,7 @@ namespace Fitness.BL.Model
         /// <summary>
         /// User name
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
         /// User gender

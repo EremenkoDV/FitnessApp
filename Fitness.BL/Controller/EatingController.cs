@@ -49,34 +49,5 @@ namespace Fitness.BL.Controller
             Save<Eating>(EATINGS_FILE_NAME, Eating);
         }
 
-        //public bool Add(string foodName, double weight)
-        //{
-        //    var product = Foods.FirstOrDefault(e => e.Name == foodName);
-        //    if (product != null)
-        //    {
-        //        Eating.Add(product, weight);
-        //        Save<Eating>(EATINGS_FILE_NAME, Eating);
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-
-        //private List<Food> GetAllFoods()
-        //{
-        //    var formatter = new BinaryFormatter();
-
-        //    using (FileStream fs = new FileStream("foods.dat", FileMode.OpenOrCreate))
-        //    {
-        //        if (fs.Length > 0 && (formatter.Deserialize(fs) is List<Food> foods))
-        //        {
-        //            return foods;
-        //        }
-        //        else
-        //        {
-        //            return new List<Food>();
-        //        }
-        //    }
-        //}
     }
 }

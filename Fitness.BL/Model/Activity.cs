@@ -16,15 +16,15 @@ namespace Fitness.BL.Model
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public double CaloriesperMinute { get; }
+
         public double CaloriesPerMinute { get; set; }
 
-        public Activity(string name, double caloriesperMinute)
+        public Activity(string name, double caloriesPerMinute)
         {
 
             // TODO : проверка
             Name = name;
-            CaloriesperMinute = caloriesperMinute;
+            CaloriesPerMinute = caloriesPerMinute;
         }
 
         public override string ToString()

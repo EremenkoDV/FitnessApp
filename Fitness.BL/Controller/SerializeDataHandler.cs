@@ -10,7 +10,7 @@ namespace Fitness.BL.Controller
 {
     public class SerializeDataHandler : IDataHandler
     {
-        public T Load<T>(string fileName)
+        public T Load<T>(string fileName) where T : class
         {
             var formatter = new BinaryFormatter();
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
@@ -26,13 +26,13 @@ namespace Fitness.BL.Controller
             }
         }
 
-        public void Save<T>(string fileName, T items)
+        public void Save<T>(string fileName, T item) where T : class
         {
             var formatter = new BinaryFormatter();
 
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                formatter.Serialize(fs, items);
+                formatter.Serialize(fs, item);
             }
         }
     }

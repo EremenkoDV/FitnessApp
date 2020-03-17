@@ -21,7 +21,7 @@ namespace Fitness.BL.Model
         /// Food's ID
         /// </summary>
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Proteins in mg

@@ -23,11 +23,13 @@ namespace Fitness.BL.Model
         ///  List of foods
         /// </summary>
         public Dictionary<int, double> Foods { get; }
-        
+
+        public int UserId { get; set; }
+
         /// <summary>
         /// Eating user
         /// </summary>
-        public User User { get; }
+        public virtual User User { get; set;  }
 
 
         public Eating(User user)
