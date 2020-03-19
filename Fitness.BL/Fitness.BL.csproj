@@ -129,6 +129,7 @@
     <Compile Include="Controller\IDataHandler.cs" />
     <Compile Include="Controller\SerializeDataHandler.cs" />
     <Compile Include="Controller\UserController.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Activity.cs" />
     <Compile Include="Model\Eating.cs" />
     <Compile Include="Model\Exercise.cs" />
