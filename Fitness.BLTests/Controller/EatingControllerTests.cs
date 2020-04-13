@@ -27,7 +27,7 @@ namespace Fitness.BL.Controller.Tests
             eatingController.Add(food, rnd.Next(50, 500));
 
             // Assert
-            Assert.AreEqual(foodName.GetHashCode(), eatingController.Eating.Foods.FirstOrDefault(e => e.Key == food.Id).Key);
+            Assert.AreEqual(foodName.GetHashCode(), eatingController.Eating.Foods.FirstOrDefault(e => e.Key.Name.Equals(food.Name)));
         }
     }
 }

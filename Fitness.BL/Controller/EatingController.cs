@@ -15,9 +15,9 @@ namespace Fitness.BL.Controller
     public class EatingController : ControllerBase
     {
 
-        private const string FOODS_FILE_NAME = "foods.dat";
+        //private const string FOODS_FILE_NAME = "foods.dat";
         
-        private const string EATINGS_FILE_NAME = "eatings.dat";
+        //private const string EATINGS_FILE_NAME = "eatings.dat";
 
         private readonly User user;
 
@@ -29,8 +29,8 @@ namespace Fitness.BL.Controller
         {
             this.user = user ?? throw new ArgumentNullException("Полученный пользователь равен null", nameof(user));
 
-            Foods = Load<List<Food>>(FOODS_FILE_NAME) ?? new List<Food>();
-            Eating = Load<Eating>(EATINGS_FILE_NAME) ?? new Eating(this.user);
+            Foods = Load<Food>() ?? new List<Food>();
+            Eating = Load<Eating>().FirstOrDefault() ?? new Eating(this.user);
         }
 
         public void Add(Food food, double weight)
@@ -40,13 +40,13 @@ namespace Fitness.BL.Controller
             {
                 Foods.Add(food);
                 Eating.Add(food, weight);
-                Save<List<Food>>(FOODS_FILE_NAME, Foods);
+                Save<Food>(Foods);
             }
             else
             {
                 Eating.Add(product, weight);
             }
-            Save<Eating>(EATINGS_FILE_NAME, Eating);
+            Save<Eating>(new List<Eating> { Eating });
         }
 
     }

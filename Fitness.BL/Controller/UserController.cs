@@ -15,7 +15,7 @@ namespace Fitness.BL.Controller
     public class UserController : ControllerBase
     {
 
-        private const string USERS_FILE_NAME = "users.dat";
+        //private const string USERS_FILE_NAME = "users.dat";
 
         /// <summary>
         /// List of Users
@@ -39,18 +39,15 @@ namespace Fitness.BL.Controller
                 throw new ArgumentNullException("Имя пользователя не может быть пустым.", nameof(userName));
             }
 
-            //Users = GetUsersData();
-            Users = Load<List<User>>(USERS_FILE_NAME) ?? new List<User>();
+            Users = Load<User>() ?? new List<User>();
 
             CurrentUser = Users.FirstOrDefault(e => e.Name == userName);
-
-            IsNewUser = CurrentUser is null;
 
             if (CurrentUser == null)
             {
                 CurrentUser = new User(userName);
                 Users.Add(CurrentUser);
-                Save<List<User>>(USERS_FILE_NAME, Users);
+                IsNewUser = true;
             }
 
         }
@@ -74,70 +71,12 @@ namespace Fitness.BL.Controller
             }
 
             CurrentUser.Gender = new Gender(gender);
-
-            //if (DateTime.TryParse(_birthday, out DateTime dateTime))
-            //{
             CurrentUser.Birthday = birthday;
-            //}
-
-            //if (Int32.TryParse(_weight, out int weight))
-            //{
             CurrentUser.Weight = weight;
-            //}
-
-            //if (Int32.TryParse(_height, out int height))
-            //{
             CurrentUser.Height = height;
-            //}
-            //Save();
-            Save<List<User>>(USERS_FILE_NAME, Users);
+            Save<User>(Users);
 
-
-            //User = user ?? throw new ArgumentNullException("Пользователь не может быть null", nameof(user));
         }
-
-        /// <summary>
-        /// Get users data
-        /// </summary>
-        /// <returns></returns>
-        //private List<User> GetUsersData()
-        //{
-        //    return Load();
-        //}
-
-        /// <summary>
-        /// Save user's data
-        /// </summary>
-        //public void Save()
-        //{
-        //    var formatter = new BinaryFormatter();
-
-        //    using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-        //    {
-        //        formatter.Serialize(fs, Users);
-        //    }
-        //}
-
-        /// <summary>
-        /// Load user's data from file
-        /// </summary>
-        /// <returns></returns>
-        //public List<User> Load()
-        //{
-        //    var formatter = new BinaryFormatter();
-
-        //    using (FileStream fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-        //    {
-        //        if (fs.Length > 0 && (formatter.Deserialize(fs) is List<User> users))
-        //        {
-        //            return users;
-        //        }
-        //        else
-        //        {
-        //            return new List<User>();
-        //        }
-        //    }
-        //}
 
     }
 }

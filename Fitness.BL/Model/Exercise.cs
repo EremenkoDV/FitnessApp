@@ -26,6 +26,8 @@ namespace Fitness.BL.Model
 
         public virtual User User { get; set; }
 
+        public Exercise() { }
+
         public Exercise(DateTime start, DateTime finish, Activity activity, User user)
         {
             // TODO: Проверка

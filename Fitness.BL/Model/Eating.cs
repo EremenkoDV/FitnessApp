@@ -17,12 +17,12 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Moment of eating
         /// </summary>
-        public DateTime Moment { get; }
+        public DateTime Moment { get; set; }
         
         /// <summary>
         ///  List of foods
         /// </summary>
-        public Dictionary<int, double> Foods { get; }
+        public Dictionary<Food, double> Foods { get; set; }
 
         public int UserId { get; set; }
 
@@ -31,25 +31,26 @@ namespace Fitness.BL.Model
         /// </summary>
         public virtual User User { get; set;  }
 
+        public Eating() { }
 
         public Eating(User user)
         {
             User = user ?? throw new ArgumentNullException("Полученный пользователь равен null", nameof(user));
             Moment = DateTime.UtcNow;
-            Foods = new Dictionary<int, double>();
+            Foods = new Dictionary<Food, double>();
         }
 
         public void Add(Food food, double weight)
         {
-            var productId = Foods.Keys.FirstOrDefault(e => e == food.Id);
+            var product = Foods.Keys.FirstOrDefault(e => e.Name.Equals(food.Name));
 
-            if (productId == 0)
+            if (product == null)
             {
-                Foods.Add(food.Id, weight);
+                Foods.Add(food, weight);
             }
             else
             {
-                Foods[productId] += weight;
+                Foods[product] += weight;
             }
         }
     }

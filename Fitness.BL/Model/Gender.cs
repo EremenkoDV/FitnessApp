@@ -16,6 +16,8 @@ namespace Fitness.BL.Model
 
         public string Name { get; set; }
 
+        public Gender() { }
+
         /// <summary>
         /// Constructor 
         /// </summary>

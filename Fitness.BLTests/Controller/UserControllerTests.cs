@@ -12,10 +12,10 @@ namespace Fitness.BL.Controller.Tests
     public class UserControllerTests
     {
         //[TestMethod()]
-        public void UserControllerTest()
-        {
-            Assert.Fail();
-        }
+        //public void UserControllerTest()
+        //{
+        //    Assert.Fail();
+        //}
 
         [TestMethod()]
         public void SetNewUserDataTest()
@@ -54,9 +54,9 @@ namespace Fitness.BL.Controller.Tests
         }
 
         //[TestMethod()]
-        public void LoadTest()
-        {
-            Assert.Fail();
-        }
+        //public void LoadTest()
+        //{
+        //    Assert.Fail();
+        //}
     }
 }

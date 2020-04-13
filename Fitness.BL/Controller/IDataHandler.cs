@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Fitness.BL.Controller
 {
     public interface IDataHandler
     {
 
-        T Load<T>(string fileName) where T : class;
+        List<T> Load<T>() where T : class;
 
-        void Save<T>(string fileName, T item) where T : class;
+        void Save<T>(List<T> items) where T : class;
 
     }
 }

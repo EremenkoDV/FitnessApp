@@ -10,29 +10,32 @@ namespace Fitness.BL.Controller
 {
     public class SerializeDataHandler : IDataHandler
     {
-        public T Load<T>(string fileName) where T : class
+        public List<T> Load<T>() where T : class
         {
+            string fileName = typeof(T).Name;
             var formatter = new BinaryFormatter();
+
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                if (fs.Length > 0 && (formatter.Deserialize(fs) is T items))
+                if (fs.Length > 0 && (formatter.Deserialize(fs) is List<T> items))
                 {
                     return items;
                 }
                 else
                 {
-                    return default(T);
+                    return default;
                 }
             }
         }
 
-        public void Save<T>(string fileName, T item) where T : class
+        public void Save<T>(List<T> items) where T : class
         {
+            string fileName = typeof(T).Name;
             var formatter = new BinaryFormatter();
 
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
-                formatter.Serialize(fs, item);
+                formatter.Serialize(fs, items);
             }
         }
     }

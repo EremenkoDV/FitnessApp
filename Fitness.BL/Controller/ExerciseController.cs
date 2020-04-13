@@ -10,9 +10,9 @@ namespace Fitness.BL.Controller
     public class ExerciseController : ControllerBase
     {
 
-        private const string EXERCISES_FILE_NAME = "exercises.dat";
+        //private const string EXERCISES_FILE_NAME = "exercises.dat";
 
-        private const string ACTIVITIES_FILE_NAME = "activies.dat";
+        //private const string ACTIVITIES_FILE_NAME = "activies.dat";
 
         private readonly User user;
 
@@ -25,8 +25,8 @@ namespace Fitness.BL.Controller
         {
             this.user = user ?? throw new ArgumentNullException("Пользователь не может быть пустым или null", nameof(user));
 
-            Exercises = Load<List<Exercise>>(EXERCISES_FILE_NAME) ?? new List<Exercise>(); ;
-            Activities = Load<List<Activity>>(ACTIVITIES_FILE_NAME) ?? new List<Activity>(); ;
+            Exercises = Load<Exercise>() ?? new List<Exercise>(); ;
+            Activities = Load<Activity>() ?? new List<Activity>(); ;
         }
 
         public void Add(Activity activity, DateTime begin, DateTime end)
@@ -39,14 +39,14 @@ namespace Fitness.BL.Controller
 
                 var exercise = new Exercise(begin, end, activity, user);
                 Exercises.Add(exercise);
-                Save<List<Activity>>(ACTIVITIES_FILE_NAME, Activities);
+                Save<Activity>(Activities);
             }
             else
             {
                 var exercise = new Exercise(begin, end, _activity, user);
                 Exercises.Add(exercise);
             }
-            Save<List<Exercise>>(EXERCISES_FILE_NAME, Exercises);
+            Save<Exercise>(Exercises);
 
         }
 

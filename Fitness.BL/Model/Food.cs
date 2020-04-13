@@ -48,6 +48,8 @@ namespace Fitness.BL.Model
         //private double CarbohydratesPerOneGramm => Carbohydrates / 100.0;
         //private double CaloriesPerOneGramm => Calories / 100.0;
 
+        public Food() { }
+
         public Food(string name) : this(name, 0, 0, 0, 0) { }
 
         public Food(string name, double calories, double proteins, double fats, double carbohydrates)

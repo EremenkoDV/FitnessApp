@@ -21,15 +21,17 @@ namespace Fitness.BL.Model
         /// </summary>
         public string Name { get; set; }
 
+        public int? GenderId { get; set; }
+
         /// <summary>
         /// User gender
         /// </summary>
-        public Gender Gender { get; set; }
+        public virtual Gender Gender { get; set; }
 
         /// <summary>
         /// User birthdate
         /// </summary>
-        public DateTime Birthday { get; set; }
+        public DateTime Birthday { get; set; } = DateTime.Now;
 
         public int Age => GetAge(Birthday);
 
@@ -43,7 +45,13 @@ namespace Fitness.BL.Model
         /// </summary>
         public double Height { get; set; }
 
+        public virtual ICollection<Eating> Eatings { get; set; }
+        
+        public virtual ICollection<Exercise> Exercises { get; set; }
+
         #endregion Properties
+
+        public User() { }
         
         /// <summary>
         /// Constructor
