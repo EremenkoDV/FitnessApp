@@ -166,10 +166,16 @@
     <value>E - enter eating data</value>
   </data>
   <data name="Select2" xml:space="preserve">
-    <value>A - enter activity</value>
+    <value>e - view eating data</value>
   </data>
   <data name="Select3" xml:space="preserve">
-    <value>Q - exit</value>
+    <value>A - enter activity</value>
+  </data>
+  <data name="Select4" xml:space="preserve">
+    <value>a - view activity</value>
+  </data>
+  <data name="Select5" xml:space="preserve">
+    <value>Q, q - exit</value>
   </data>
   <data name="UserBirthday" xml:space="preserve">
     <value>user's birthday</value>

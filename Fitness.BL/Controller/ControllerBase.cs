@@ -11,8 +11,8 @@ namespace Fitness.BL.Controller
     public abstract class ControllerBase
     {
 
-        private readonly IDataHandler dataHandler = new SerializeDataHandler();
-        //private readonly IDataHandler dataHandler = new DatabaseDataHandler();
+        //private readonly IDataHandler dataHandler = new SerializeDataHandler();
+        private readonly IDataHandler dataHandler = new DatabaseDataHandler();
 
         /// <summary>
         /// Load users data

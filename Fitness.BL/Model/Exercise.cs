@@ -33,8 +33,10 @@ namespace Fitness.BL.Model
             // TODO: Проверка
             Start = start;
             Finish = finish;
-            Activity = activity;
-            User = user;
+            Activity = activity ?? throw new ArgumentNullException("Полученный пользователь равен null", nameof(activity));
+            ActivityId = activity.Id;
+            User = user ?? throw new ArgumentNullException("Полученный пользователь равен null", nameof(user));
+            UserId = user.Id;
         }
 
     }

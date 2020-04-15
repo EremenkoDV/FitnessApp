@@ -142,7 +142,7 @@
     <value>название упражнения</value>
   </data>
   <data name="FoodCalories" xml:space="preserve">
-    <value>количество калорийность в порции продукта (в калориях)</value>
+    <value>калорийность в порции продукта (в калориях)</value>
   </data>
   <data name="FoodCarbohydrates" xml:space="preserve">
     <value>количество углеводов в порции продукта (в граммах)</value>
@@ -166,10 +166,16 @@
     <value>E - ввести прием пищи</value>
   </data>
   <data name="Select2" xml:space="preserve">
-    <value>A - ввести вид активности</value>
+    <value>e - просмотреть приемы пищи</value>
   </data>
   <data name="Select3" xml:space="preserve">
-    <value>Q - выход</value>
+    <value>A - ввести вид активности</value>
+  </data>
+  <data name="Select4" xml:space="preserve">
+    <value>a - просмотреть виды активности</value>
+  </data>
+  <data name="Select5" xml:space="preserve">
+    <value>Q,q - выход</value>
   </data>
   <data name="UserBirthday" xml:space="preserve">
     <value>день рождения пользователя</value>

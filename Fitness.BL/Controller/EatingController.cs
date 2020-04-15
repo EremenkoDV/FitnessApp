@@ -30,7 +30,7 @@ namespace Fitness.BL.Controller
             this.user = user ?? throw new ArgumentNullException("Полученный пользователь равен null", nameof(user));
 
             Foods = Load<Food>() ?? new List<Food>();
-            Eating = Load<Eating>().FirstOrDefault() ?? new Eating(this.user);
+            Eating = Load<Eating>()?.FirstOrDefault() ?? new Eating(this.user);
         }
 
         public void Add(Food food, double weight)

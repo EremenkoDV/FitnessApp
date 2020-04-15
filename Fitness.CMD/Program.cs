@@ -14,8 +14,8 @@ namespace Fitness.CMD
 {
     internal class Program
     {
-        //static CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
-        static CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+        static CultureInfo culture = CultureInfo.CreateSpecificCulture("ru-RU");
+        //static CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
         //static CultureInfo culture = CultureInfo.CreateSpecificCulture("de-DE");
         static ResourceManager resourceManager = new ResourceManager("Fitness.CMD.Languages.Messages", typeof(Program).Assembly);
 
@@ -47,58 +47,67 @@ namespace Fitness.CMD
             {
                 Console.WriteLine(resourceManager.GetString("Line", culture));
                 Console.WriteLine(resourceManager.GetString("ActQuestion", culture));
-                Console.Write(resourceManager.GetString("Select1", culture) + " :");
-                Console.Write(resourceManager.GetString("Select2", culture) + " :");
-                Console.Write(resourceManager.GetString("Select3", culture) + " :");
+                Console.WriteLine(resourceManager.GetString("Select1", culture) + " :");
+                Console.WriteLine(resourceManager.GetString("Select2", culture) + " :");
+                Console.WriteLine(resourceManager.GetString("Select3", culture) + " :");
+                Console.WriteLine(resourceManager.GetString("Select4", culture) + " :");
+                Console.WriteLine(resourceManager.GetString("Select5", culture) + " :");
                 var key = Console.ReadKey();
                 Console.WriteLine();
 
-                switch (key.Key)
+                //switch (key.Key)
+                switch (key.KeyChar)
                 {
-                    case ConsoleKey.E:
-                        string foodName = GetEnteredValue<string>(resourceManager.GetString("FoodName", culture) + ": ", "value <> ''");
-                        double weight = GetEnteredValue<double>(resourceManager.GetString("FoodWeight", culture) + ": ", "value > '0' AND value < '10000'");
-                        double calories = GetEnteredValue<double>(resourceManager.GetString("FoodCalories", culture) + ": ", "value > '0' AND value < '10000'");
-                        double proteins = GetEnteredValue<double>(resourceManager.GetString("FoodProteins", culture) + ": ", "value >= '0' AND value < '10000'");
-                        double fats = GetEnteredValue<double>(resourceManager.GetString("FoodFats", culture) + ": ", "value >= '0' AND value < '10000'");
-                        double carbohydrates = GetEnteredValue<double>(resourceManager.GetString("FoodCarbohydrates", culture) + ": ", "value >= '0' AND value < '10000'");
+                    //case ConsoleKey.E:
+                    case 'e':
+                    case 'E':
+                        if (key.KeyChar == 'E')
+                        {
+                            string foodName = GetEnteredValue<string>(resourceManager.GetString("FoodName", culture) + ": ", "value <> ''");
+                            double weight = GetEnteredValue<double>(resourceManager.GetString("FoodWeight", culture) + ": ", "value > '0' AND value < '10000'");
+                            double calories = GetEnteredValue<double>(resourceManager.GetString("FoodCalories", culture) + ": ", "value > '0' AND value < '10000'");
+                            double proteins = GetEnteredValue<double>(resourceManager.GetString("FoodProteins", culture) + ": ", "value >= '0' AND value < '10000'");
+                            double fats = GetEnteredValue<double>(resourceManager.GetString("FoodFats", culture) + ": ", "value >= '0' AND value < '10000'");
+                            double carbohydrates = GetEnteredValue<double>(resourceManager.GetString("FoodCarbohydrates", culture) + ": ", "value >= '0' AND value < '10000'");
 
-                        Food food = new Food(foodName, calories, proteins, fats, carbohydrates);
-                        eatingController.Add(food, weight);
+                            Food food = new Food(foodName, calories, proteins, fats, carbohydrates);
+                            eatingController.Add(food, weight);
+                        }
 
                         //Console.Write(eatingController.Eating.Foods.FirstOrDefault(e => e.Key == foodName.GetHashCode()));
                         foreach (var item in eatingController.Foods)
                         {
                             Console.WriteLine(resourceManager.GetString("Line", culture));
-                            Console.WriteLine(item.Id);
-                            Console.WriteLine(item.Name);
-                            Console.WriteLine(item.Calories);
-                            Console.WriteLine(item.Proteins);
-                            Console.WriteLine(item.Fats);
-                            Console.WriteLine(item.Carbohydrates);
+                            Console.WriteLine($"\t{item.Name} : {item.Calories} kcal - prot/fat/carb : {item.Proteins}g/{item.Fats}g/{item.Carbohydrates}g");
                         }
                         break;
-                    case ConsoleKey.A:
-                        string exerciseName = GetEnteredValue<string>(resourceManager.GetString("ExerciseName", culture) + ": ", "value <> ''");
-                        double energy = GetEnteredValue<double>(resourceManager.GetString("ExerciseEnergy", culture) + ": ", "value > '0' AND value < '10000'");
-                        DateTime begin = GetEnteredValue<DateTime>(resourceManager.GetString("ExerciseBegin", culture) + ": ", "value > '01.01.1900' AND value < '31.12.2100'");
-                        DateTime end = GetEnteredValue<DateTime>(resourceManager.GetString("ExerciseEnd", culture) + ": ", "value > '01.01.1900' AND value < '31.12.2100'");
-                        var activity = new Activity(exerciseName, energy);
-                        //var exercise = new Exercise(begin, end, activity, userController.CurrentUser);
-                        exerciseController.Add(activity, begin, end);
+                    //case ConsoleKey.A:
+                    case 'a':
+                    case 'A':
+                        if (key.KeyChar == 'A')
+                        {
+                            string exerciseName = GetEnteredValue<string>(resourceManager.GetString("ExerciseName", culture) + ": ", "value <> ''");
+                            double energy = GetEnteredValue<double>(resourceManager.GetString("ExerciseEnergy", culture) + ": ", "value > '0' AND value < '10000'");
+                            DateTime begin = GetEnteredValue<DateTime>(resourceManager.GetString("ExerciseBegin", culture) + ": ", "value > '01.01.1900' AND value < '31.12.2100'");
+                            DateTime end = GetEnteredValue<DateTime>(resourceManager.GetString("ExerciseEnd", culture) + ": ", "value > '01.01.1900' AND value < '31.12.2100'");
+                            var activity = new Activity(exerciseName, energy);
+                            //var exercise = new Exercise(begin, end, activity, userController.CurrentUser);
+                            exerciseController.Add(activity, begin, end);
+                        }
+
                         foreach (var item in exerciseController.Exercises)
                         {
                             Console.WriteLine(resourceManager.GetString("Line", culture));
                             Console.WriteLine($"\t{item.Activity} : {item.Start.ToShortTimeString()} - {item.Finish.ToShortTimeString()}");
                         }
                         break;
-                    case ConsoleKey.Q:
+                    //case ConsoleKey.Q:
+                    case 'q':
+                    case 'Q':
                         Environment.Exit(0);
                         break;
                 }
             }
-            Console.ReadLine();
-
 
         }
 

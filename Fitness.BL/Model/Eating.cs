@@ -36,6 +36,7 @@ namespace Fitness.BL.Model
         public Eating(User user)
         {
             User = user ?? throw new ArgumentNullException("Полученный пользователь равен null", nameof(user));
+            UserId = user.Id;
             Moment = DateTime.UtcNow;
             Foods = new Dictionary<Food, double>();
         }

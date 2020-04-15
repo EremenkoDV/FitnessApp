@@ -43,10 +43,7 @@ namespace Fitness.BL.Model
         /// </summary>
         public double Calories { get; set; }
 
-        //private double ProteinsPerOneGramm => Proteins / 100.0;
-        //private double FatsPerOneGramm => Fats / 100.0;
-        //private double CarbohydratesPerOneGramm => Carbohydrates / 100.0;
-        //private double CaloriesPerOneGramm => Calories / 100.0;
+        public virtual ICollection<Eating> Eatings { get; set; }
 
         public Food() { }
 
@@ -56,18 +53,18 @@ namespace Fitness.BL.Model
         {
             // TODO: проверка
             Name = name;
-            Id = Name.GetHashCode();
+            //Id = Name.GetHashCode();
             Calories = calories / 100.0;
             Proteins = proteins / 100.0;
             Fats = fats / 100.0;
             Carbohydrates = carbohydrates / 100.0;
         }
 
-        public override int GetHashCode()
-        {
-            //return Encoding.UTF8.GetBytes(name,) name.Length
-            return Name.GetHashCode();
-        }
+        //public override int GetHashCode()
+        //{
+        //    //return Encoding.UTF8.GetBytes(name,) name.Length
+        //    return Name.GetHashCode();
+        //}
 
         public override string ToString()
         {

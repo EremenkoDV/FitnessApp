@@ -12,7 +12,7 @@ namespace Fitness.BL.Controller
     {
         public List<T> Load<T>() where T : class
         {
-            string fileName = typeof(T).Name;
+            string fileName = typeof(T).Name + ".dat";
             var formatter = new BinaryFormatter();
 
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))
@@ -30,7 +30,7 @@ namespace Fitness.BL.Controller
 
         public void Save<T>(List<T> items) where T : class
         {
-            string fileName = typeof(T).Name;
+            string fileName = typeof(T).Name + ".dat";
             var formatter = new BinaryFormatter();
 
             using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate))

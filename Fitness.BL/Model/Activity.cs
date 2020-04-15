@@ -31,6 +31,16 @@ namespace Fitness.BL.Model
             CaloriesPerMinute = caloriesPerMinute;
         }
 
+        //public void Add(Exercise exercise)
+        //{
+        //    var _exercise = Exercises.FirstOrDefault(e => e.Equals(exercise));
+
+        //    if (_exercise == null)
+        //    {
+        //        Exercises.Add(exercise);
+        //    }
+        //}
+
         public override string ToString()
         {
             return Name;

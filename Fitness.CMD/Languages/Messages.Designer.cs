@@ -205,7 +205,7 @@ namespace Fitness.CMD.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на A - enter activity.
+        ///   Ищет локализованную строку, похожую на e - view eating data.
         /// </summary>
         internal static string Select2 {
             get {
@@ -214,11 +214,29 @@ namespace Fitness.CMD.Languages {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Q - exit.
+        ///   Ищет локализованную строку, похожую на A - enter activity.
         /// </summary>
         internal static string Select3 {
             get {
                 return ResourceManager.GetString("Select3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на a - view activity.
+        /// </summary>
+        internal static string Select4 {
+            get {
+                return ResourceManager.GetString("Select4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Q, q - exit.
+        /// </summary>
+        internal static string Select5 {
+            get {
+                return ResourceManager.GetString("Select5", resourceCulture);
             }
         }
         

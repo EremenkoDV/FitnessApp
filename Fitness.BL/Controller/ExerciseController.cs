@@ -31,7 +31,6 @@ namespace Fitness.BL.Controller
 
         public void Add(Activity activity, DateTime begin, DateTime end)
         {
-
             var _activity = Activities.FirstOrDefault(e => e.Name == activity.Name);
             if (_activity == null)
             {
@@ -47,10 +46,7 @@ namespace Fitness.BL.Controller
                 Exercises.Add(exercise);
             }
             Save<Exercise>(Exercises);
-
         }
-
-
 
     }
 }
