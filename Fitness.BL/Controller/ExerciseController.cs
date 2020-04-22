@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
@@ -17,7 +15,7 @@ namespace Fitness.BL.Controller
         private readonly User user;
 
         public List<Exercise> Exercises { get; }
-        
+
         public List<Activity> Activities { get; }
 
 

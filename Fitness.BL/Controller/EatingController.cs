@@ -1,11 +1,7 @@
 ﻿using Fitness.BL.Model;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller
 {
@@ -16,7 +12,7 @@ namespace Fitness.BL.Controller
     {
 
         //private const string FOODS_FILE_NAME = "foods.dat";
-        
+
         //private const string EATINGS_FILE_NAME = "eatings.dat";
 
         private readonly User user;

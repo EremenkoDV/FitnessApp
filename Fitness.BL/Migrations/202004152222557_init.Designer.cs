@@ -13,7 +13,7 @@ namespace Fitness.BL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202004141826168_init"; }
+            get { return "202004152222557_init"; }
         }
         
         string IMigrationMetadata.Source

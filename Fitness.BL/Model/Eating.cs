@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BL.Model
 {
@@ -18,7 +16,7 @@ namespace Fitness.BL.Model
         /// Moment of eating
         /// </summary>
         public DateTime Moment { get; set; }
-        
+
         /// <summary>
         ///  List of foods
         /// </summary>
@@ -29,7 +27,7 @@ namespace Fitness.BL.Model
         /// <summary>
         /// Eating user
         /// </summary>
-        public virtual User User { get; set;  }
+        public virtual User User { get; set; }
 
         public Eating() { }
 
@@ -43,15 +41,15 @@ namespace Fitness.BL.Model
 
         public void Add(Food food, double weight)
         {
-            var product = Foods.Keys.FirstOrDefault(e => e.Name.Equals(food.Name));
+            var _food = Foods.Keys.FirstOrDefault(e => e.Name.Equals(food.Name));
 
-            if (product == null)
+            if (_food == null)
             {
                 Foods.Add(food, weight);
             }
             else
             {
-                Foods[product] += weight;
+                Foods[_food] += weight;
             }
         }
     }

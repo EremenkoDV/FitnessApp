@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BL.Model
 {
@@ -46,13 +43,13 @@ namespace Fitness.BL.Model
         public double Height { get; set; }
 
         public virtual ICollection<Eating> Eatings { get; set; }
-        
+
         public virtual ICollection<Exercise> Exercises { get; set; }
 
         #endregion Properties
 
         public User() { }
-        
+
         /// <summary>
         /// Constructor
         /// </summary>

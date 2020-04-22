@@ -1,14 +1,10 @@
 ﻿using Fitness.BL.Controller;
 using Fitness.BL.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
-using System.Linq;
 using System.Resources;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.CMD
 {

@@ -1,10 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Fitness.BL.Controller;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fitness.BL.Controller.Tests
 {
@@ -22,7 +17,7 @@ namespace Fitness.BL.Controller.Tests
         {
             // Arrange
             var userName = Guid.NewGuid().ToString();
-            var birthday = DateTime.Now.AddYears(- 18);
+            var birthday = DateTime.Now.AddYears(-18);
             var weight = 90;
             var height = 190;
             var gender = "м";
